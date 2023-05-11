@@ -29,12 +29,12 @@ internal fun MainPanel(){
             )
     ) {
         Row{
-            Text("↓10°")
+            Text("↓${8}°")
             Spacer(
                 modifier = Modifier
                     .width(5.dp)
             )
-            Text("↑20°")
+            Text("↑${8}°")
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -42,7 +42,7 @@ internal fun MainPanel(){
                 .fillMaxWidth()
         ) {
             Text(
-                "15°",
+                "${8}°",
                 textAlign = TextAlign.Left,
                 fontSize = 48.sp,
                 modifier = Modifier
@@ -61,9 +61,9 @@ internal fun MainPanel(){
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-
             Text(
-                "Feels like 13°",
+                //TODO: add R.string
+                "Feels like ${8}",
                 modifier = Modifier
                     .weight(2f)
             )

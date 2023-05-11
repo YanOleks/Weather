@@ -12,6 +12,7 @@ import com.oleks.weather.ui.theme.WeatherTheme
 @Composable
 fun DayScreen(){
     Column{
+        //TODO: change to class "PANEL"
         MainPanel()
         Spacer(
             modifier = Modifier
