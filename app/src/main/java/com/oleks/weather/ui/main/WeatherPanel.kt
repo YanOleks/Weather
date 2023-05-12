@@ -17,9 +17,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.oleks.weather.R
+import com.oleks.weather.ui.overview.WeatherView
 
 @Composable
-internal fun MainPanel(){
+internal fun MainPanel(currentWeather: WeatherView.CurrentWeather){
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -29,12 +30,12 @@ internal fun MainPanel(){
             )
     ) {
         Row{
-            Text("↓10°")
+            Text("↓${currentWeather.lowest}°")
             Spacer(
                 modifier = Modifier
                     .width(5.dp)
             )
-            Text("↑20°")
+            Text("↑${currentWeather.highest}°")
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -42,7 +43,7 @@ internal fun MainPanel(){
                 .fillMaxWidth()
         ) {
             Text(
-                "15°",
+                "${currentWeather.temperature}°",
                 textAlign = TextAlign.Left,
                 fontSize = 48.sp,
                 modifier = Modifier
@@ -63,7 +64,7 @@ internal fun MainPanel(){
         ) {
 
             Text(
-                "Feels like 13°",
+                "Feels like ${currentWeather.apparent}°",
                 modifier = Modifier
                     .weight(2f)
             )

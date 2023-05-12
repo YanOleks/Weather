@@ -8,14 +8,17 @@ import com.squareup.moshi.JsonClass
 data class CurrentWeather(
     @Json(name = "is_day")
     val isDay: Int,
-    @Json(name = "temperature")
+
     val temperature: Double,
-    @Json(name = "time")
+
     val time: String,
+
     @Json(name = "weathercode")
     val weatherCode: Int,
+
     @Json(name = "winddirection")
     val windDirection: Double,
+
     @Json(name = "windspeed")
     val windSpeed: Double
 )

@@ -8,12 +8,15 @@ import com.squareup.moshi.JsonClass
 data class DailyUnits(
     @Json(name = "precipitation_probability_max")
     val precipitationProbabilityMax: String,
+
     @Json(name = "temperature_2m_max")
     val temperature2mMax: String,
+
     @Json(name = "temperature_2m_min")
     val temperature2mMin: String,
-    @Json(name = "time")
+
     val time: String,
+
     @Json(name = "weathercode")
     val weatherCode: String
 )

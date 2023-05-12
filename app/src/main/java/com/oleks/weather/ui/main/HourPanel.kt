@@ -19,28 +19,29 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.oleks.weather.R
+import com.oleks.weather.ui.overview.WeatherView
 import com.oleks.weather.ui.theme.WeatherTheme
+import androidx.compose.foundation.lazy.items
 
-const val TOTAL_HOURS = 24
 
 @Composable
-internal fun HourPanel(){
+internal fun HourPanel(hourWeather: List<WeatherView.HourWeather>){
     LazyRow (
         horizontalArrangement = Arrangement.spacedBy(3.dp)
     ) {
-        items(TOTAL_HOURS){
-            HourCard()
+        items(hourWeather){hour ->
+            HourCard(hour)
         }
     }
 }
 
 @Composable
-private fun HourCard(){
+private fun HourCard(hour: WeatherView.HourWeather){
     Column (
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "10:00",
+            text = hour.time,
             style = TextStyle(
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold
@@ -54,7 +55,7 @@ private fun HourCard(){
             modifier = Modifier
                 .height(3.dp)
         )
-        Text("15°")
+        Text("${hour.temperature}°")
         Image(
             painterResource(id = R.drawable.ic_test),
             modifier = Modifier
@@ -69,6 +70,6 @@ private fun HourCard(){
 @Composable
 private fun GreetingPreview() {
     WeatherTheme {
-        HourPanel()
+        //HourPanel()
     }
 }
