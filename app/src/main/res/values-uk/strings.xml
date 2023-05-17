@@ -2,4 +2,6 @@
 <resources>
     <string name="feels">Відчувається</string>
     <string name="loading">Завантаження…</string>
+    <string name="notification">Надсилати сповіщення</string>
+    <string name="notification_time">Надсилати о</string>
 </resources>

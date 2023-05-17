@@ -2,4 +2,6 @@
     <string name="app_name" translatable="false">Weather</string>
     <string name="feels">Feels like</string>
     <string name="loading">Loading…</string>
+    <string name="notification">Send notifications</string>
+    <string name="notification_time">Send at</string>
 </resources>

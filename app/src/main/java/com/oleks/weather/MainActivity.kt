@@ -12,18 +12,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModelProvider
 import com.oleks.weather.data.di.WeatherRepo
 import com.oleks.weather.ui.main.DayScreen
+import com.oleks.weather.ui.overview.SettingsView
 import com.oleks.weather.ui.overview.WeatherView
 import com.oleks.weather.ui.overview.WeatherViewFactory
 import com.oleks.weather.ui.theme.WeatherTheme
 
 class MainActivity : ComponentActivity() {
     lateinit var viewModel: WeatherView
+    lateinit var settingsView: SettingsView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        settingsView = SettingsView(this)
         viewModel = ViewModelProvider(this,
             WeatherViewFactory(WeatherRepo()))[WeatherView::class.java]
-        //Log.i("TEST", viewModel.weather.value!!.currentWeather.temperature.toString())
         setContent {
             WeatherTheme {
                 // A surface container using the 'background' color from the theme
@@ -35,6 +37,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+
     }
 }
 
