@@ -18,7 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.oleks.weather.R
 import com.oleks.weather.ui.overview.WeatherView
 import com.oleks.weather.ui.theme.WeatherTheme
 import androidx.compose.foundation.lazy.items
@@ -57,7 +56,7 @@ private fun HourCard(hour: WeatherView.HourWeather){
         )
         Text("${hour.temperature}°")
         Image(
-            painterResource(id = R.drawable.ic_test),
+            painterResource(id = hour.img),
             modifier = Modifier
                 .height(50.dp)
                 .width(50.dp),

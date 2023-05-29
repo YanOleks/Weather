@@ -2,8 +2,11 @@ package com.oleks.weather.ui.overview
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.oleks.weather.LATITUDE
+import com.oleks.weather.LONGITUDE
+import com.oleks.weather.R
 import com.oleks.weather.data.di.WeatherRepo
-import com.oleks.weather.data.model.WeatherInfo
+import com.oleks.weather.data.openmeteo.model.WeatherInfo
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,10 +20,11 @@ import kotlin.math.roundToInt
 class WeatherView constructor(
     private val weatherRepo: WeatherRepo
 ): ViewModel() {
-    private val hours = 24
+    private val hours = 23
 
-    private var latitude: Double = 50.4375
-    private var longitude: Double = 30.5
+    var latitude: Double = LATITUDE
+    var longitude: Double = LONGITUDE
+    var place: String? = null
 
     val errorMessage = MutableLiveData<String>()
     //private lateinit var weather: WeatherInfo
@@ -65,43 +69,60 @@ class WeatherView constructor(
         val apparent: Int,
         val lowest: Int,
         val highest: Int,
-        /*TODO: val state: String,
-        val img: Int*/
+        val state: Int,
+        val img: Int
     )
 
     private fun getCurrentWeather(weather: WeatherInfo): CurrentWeather {
         val time = weather.currentWeather.time
+        val index = getIndexFromTime(time)
+
+        val (stateString, stateImg) = getState(weather.hourly.weatherCode[index])
         return CurrentWeather(
             weather.currentWeather.temperature.roundToInt(),
-            getApparent(weather.hourly.apparentTemperature, time),
+            getApparent(weather.hourly.apparentTemperature, index),
             weather.daily.temperature2mMin[0].roundToInt(),
-            weather.daily.temperature2mMax[0].roundToInt()
+            weather.daily.temperature2mMax[0].roundToInt(),
+            stateString,
+            stateImg
         )
     }
 
     private fun getIndexFromTime(time: String): Int{
         return time.substring(11, 13).toInt()
     }
-    private fun getApparent(values: List<Double>, time: String): Int{
-        val index = getIndexFromTime(time)
+    private fun getState(code: Int): Pair<Int, Int> {
+        return when(code){
+            0 -> Pair(R.string.clear, R.drawable.sun)
+            1 -> Pair(R.string.mainly, R.drawable.partly_cloudy)
+            2 -> Pair(R.string.partly, R.drawable.partly_cloudy)
+            3 -> Pair(R.string.overcast, R.drawable.cloud)
+
+            51, 53, 55 -> Pair(R.string.drizzle, R.drawable.cloudy)
+            61, 63, 65 -> Pair(R.string.rain, R.drawable.raining)
+            else -> Pair(0,0)
+        }
+    }
+    private fun getApparent(values: List<Double>, index: Int): Int{
         return values[index].roundToInt()
     }
 
     data class HourWeather(
         val time: String,
         val temperature: Int,
-        //TODO: val img: Int
+        val img: Int
     )
 
     private fun getHourWeather(weather: WeatherInfo): List<HourWeather>{
         val list = mutableListOf<HourWeather>()
         var time = getIndexFromTime(weather.currentWeather.time)
         val temperatureList = weather.hourly.temperature2m
-
         for (i in 0..hours){
+            val (_, img) = getState(weather.hourly.weatherCode[time])
             list.add(HourWeather(
                 "${ if (time < 24) time else time - 24}:00",
-                temperatureList[time].roundToInt()
+                temperatureList[time].roundToInt(),
+                img
             ))
             time++
         }

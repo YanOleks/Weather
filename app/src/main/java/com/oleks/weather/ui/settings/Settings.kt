@@ -33,8 +33,8 @@ fun SettingsScreen(
         }, alarmHour.value, alarmMinute.value, true
     )
 
-    Column() {
-        Row() {
+    Column {
+        Row {
             Text(
                 stringResource(R.string.notification)
             )
@@ -43,7 +43,7 @@ fun SettingsScreen(
                 settingsView.changeAlarmState()
             })
         }
-        Row() {
+        Row {
             Text(
                 stringResource(R.string.notification_time)
             )

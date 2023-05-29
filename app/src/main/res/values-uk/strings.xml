@@ -4,4 +4,15 @@
     <string name="loading">Завантаження…</string>
     <string name="notification">Надсилати сповіщення</string>
     <string name="notification_time">Надсилати о</string>
+    <string name="clear">Ясно</string>
+    <string name="mainly">Ясно</string>
+    <string name="partly">Мінливо</string>
+    <string name="overcast">Похмуро</string>
+    <string name="drizzle">Мряка</string>
+    <string name="rain">Дощ</string>
+    <string name="home">Головна</string>
+    <string name="settings">Сповіщення</string>
+    <string name="about">Про застосунок</string>
+    <string name="today">Сьогодні</string>
+    <string name="week">Тиждень</string>
 </resources>

@@ -1,7 +1,7 @@
 package com.oleks.weather.data.di
 
-import com.oleks.weather.data.api.RetrofitHelper
+import com.oleks.weather.data.openmeteo.api.OpenMeteoHelper
 
 class WeatherRepo {
-    suspend fun getWeather(latitude: Double, longitude: Double) = RetrofitHelper.Service.getWeather(latitude, longitude)
+    suspend fun getWeather(latitude: Double, longitude: Double) = OpenMeteoHelper.Service.getWeather(latitude, longitude)
 }

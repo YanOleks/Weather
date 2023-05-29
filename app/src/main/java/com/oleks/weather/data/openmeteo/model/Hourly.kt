@@ -1,4 +1,4 @@
-package com.oleks.weather.data.model
+package com.oleks.weather.data.openmeteo.model
 
 
 import com.squareup.moshi.Json

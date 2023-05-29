@@ -1,12 +1,12 @@
-package com.oleks.weather.data.api
+package com.oleks.weather.data.openmeteo.api
 
-import com.oleks.weather.data.model.WeatherInfo
+import com.oleks.weather.data.openmeteo.model.WeatherInfo
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface WeatherApiService {
-    @GET(ApiConstants.END_POINT)
+internal interface WeatherApiService {
+    @GET(OpenMeteoConstants.END_POINT)
     suspend fun getWeather(
         @Query("latitude") latitude: Double,
         @Query("longitude") longitude: Double

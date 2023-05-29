@@ -51,7 +51,7 @@ internal fun MainPanel(currentWeather: WeatherView.CurrentWeather){
                     .weight(2f)
             )
             Image(
-                painterResource(id = R.drawable.ic_test),
+                painterResource(currentWeather.img),
                 modifier = Modifier
                     .weight(1f)
                     .height(80.dp),
@@ -70,7 +70,7 @@ internal fun MainPanel(currentWeather: WeatherView.CurrentWeather){
                     .weight(2f)
             )
             Text(
-                "Test state",
+                stringResource(id = currentWeather.state),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .weight(1f)

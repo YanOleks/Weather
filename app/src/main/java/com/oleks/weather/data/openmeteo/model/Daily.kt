@@ -1,22 +1,22 @@
-package com.oleks.weather.data.model
+package com.oleks.weather.data.openmeteo.model
 
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class DailyUnits(
+data class Daily(
     @Json(name = "precipitation_probability_max")
-    val precipitationProbabilityMax: String,
+    val precipitationProbabilityMax: List<Int>,
 
     @Json(name = "temperature_2m_max")
-    val temperature2mMax: String,
+    val temperature2mMax: List<Double>,
 
     @Json(name = "temperature_2m_min")
-    val temperature2mMin: String,
+    val temperature2mMin: List<Double>,
 
-    val time: String,
+    val time: List<String>,
 
     @Json(name = "weathercode")
-    val weatherCode: String
+    val weatherCode: List<Int>
 )
