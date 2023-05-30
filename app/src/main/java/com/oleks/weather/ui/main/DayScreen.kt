@@ -34,6 +34,7 @@ fun DayScreen(viewModel: WeatherView, nav: NavController){
     var isButtonClicked by remember { mutableStateOf(false) }
     val currentWeather = viewModel.currentWeather.observeAsState()
     val hourWeather = viewModel.hourWeather.observeAsState()
+    val weekData = viewModel.weekWeather.observeAsState()
     val loaded = viewModel.loading.observeAsState(initial = false)
 
     LaunchedEffect(key1 = Unit){
@@ -72,7 +73,7 @@ fun DayScreen(viewModel: WeatherView, nav: NavController){
                 )
                 HourPanel(hourWeather.value!!)
             } else if (state == 1){
-                WeekTab()
+                WeekTab(weekData.value!!)
             }
         }
     } else {

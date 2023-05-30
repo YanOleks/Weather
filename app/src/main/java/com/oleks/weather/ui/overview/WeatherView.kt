@@ -13,6 +13,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Locale
 import kotlin.math.roundToInt
 
 //TODO: latitude, longitude
@@ -21,6 +23,7 @@ class WeatherView constructor(
     private val weatherRepo: WeatherRepo
 ): ViewModel() {
     private val hours = 23
+    private val days = 6
 
     var latitude: Double = LATITUDE
     var longitude: Double = LONGITUDE
@@ -30,6 +33,7 @@ class WeatherView constructor(
     //private lateinit var weather: WeatherInfo
     val currentWeather = MutableLiveData<CurrentWeather>()
     var hourWeather = MutableLiveData<List<HourWeather>>()
+    var weekWeather = MutableLiveData<List<Day>>()
     private var job: Job? = null
 
     val loading = MutableLiveData(true)
@@ -46,6 +50,7 @@ class WeatherView constructor(
                 if (response.isSuccessful && weather != null) {
                     currentWeather.postValue(getCurrentWeather(weather))
                     hourWeather.postValue(getHourWeather(weather))
+                    weekWeather.postValue(getWeek(weather))
                     loading.value = false
                 } else {
                     onError("Error : ${response.message()}")
@@ -129,5 +134,39 @@ class WeatherView constructor(
 
         return list.toList()
     }
+    data class Day(
+        val date: String,
+        val maxTemperature: Int,
+        val minTemperature: Int,
+        val state: Int,
+        val img: Int
+    )
 
+    private fun getWeek(weather: WeatherInfo): List<Day>{
+
+        val list = mutableListOf<Day>()
+        for (i in 0..days){
+            val (state, img) = getState(weather.daily.weatherCode[i])
+            list.add(
+
+                Day(
+                    date = getDate(weather.daily.time[i]),
+                    maxTemperature = weather.daily.temperature2mMax[i].roundToInt(),
+                    minTemperature = weather.daily.temperature2mMin[i].roundToInt(),
+                    state = state,
+                    img = img
+                )
+            )
+        }
+
+        return list.toList()
+    }
+
+    private fun getDate(str: String): String{
+        //val date = LocalDate.parse(str, DateTimeFormatter.ISO_DATE)
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+        val outputFormat  = SimpleDateFormat("d MMMM", Locale(Locale.getDefault().language))
+        val date = inputFormat.parse(str)
+        return outputFormat.format(date)
+    }
 }
