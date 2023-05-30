@@ -1,5 +1,7 @@
 package com.oleks.weather.ui.overview
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.oleks.weather.LATITUDE
@@ -16,6 +18,7 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlin.math.roundToInt
+import androidx.compose.runtime.setValue
 
 //TODO: latitude, longitude
 
@@ -27,13 +30,16 @@ class WeatherView constructor(
 
     var latitude: Double = LATITUDE
     var longitude: Double = LONGITUDE
-    var place: String? = null
+    //var place: String? = null
 
     val errorMessage = MutableLiveData<String>()
     //private lateinit var weather: WeatherInfo
     val currentWeather = MutableLiveData<CurrentWeather>()
     var hourWeather = MutableLiveData<List<HourWeather>>()
     var weekWeather = MutableLiveData<List<Day>>()
+    var place by mutableStateOf("")
+    var isPlaceChosen by mutableStateOf(false)
+
     private var job: Job? = null
 
     val loading = MutableLiveData(true)
@@ -104,8 +110,8 @@ class WeatherView constructor(
             3 -> Pair(R.string.overcast, R.drawable.cloud)
 
             51, 53, 55 -> Pair(R.string.drizzle, R.drawable.cloudy)
-            61, 63, 65 -> Pair(R.string.rain, R.drawable.raining)
-            else -> Pair(0,0)
+            61, 63, 65, 80, 81, 82 -> Pair(R.string.rain, R.drawable.raining)
+            else -> Pair(R.string.rain,R.drawable.ic_test)
         }
     }
     private fun getApparent(values: List<Double>, index: Int): Int{

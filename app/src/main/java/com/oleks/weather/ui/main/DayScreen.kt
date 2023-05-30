@@ -2,11 +2,17 @@ package com.oleks.weather.ui.main
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
@@ -20,7 +26,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -36,11 +44,21 @@ fun DayScreen(viewModel: WeatherView, nav: NavController){
     val hourWeather = viewModel.hourWeather.observeAsState()
     val weekData = viewModel.weekWeather.observeAsState()
     val loaded = viewModel.loading.observeAsState(initial = false)
+    var placeName by remember {
+        mutableStateOf("")
+    }
+    var isPlaceChosen by remember {
+        mutableStateOf(viewModel.isPlaceChosen)
+    }
+    placeName = if (!isPlaceChosen){
+        stringResource(id = R.string.position)
+    } else {
+        viewModel.place
+    }
 
     LaunchedEffect(key1 = Unit){
         viewModel.getWeather()
     }
-
     if (!loaded.value){
 
         Column{
@@ -48,9 +66,18 @@ fun DayScreen(viewModel: WeatherView, nav: NavController){
                     nav.navigate("screen2")
                 },
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                shape = RoundedCornerShape(0),
+                colors = ButtonDefaults.textButtonColors()
             ) {
-                Text("Search")
+
+                Row {
+                    Icon(imageVector = Icons.Default.Search, contentDescription = "" )
+                }
+                Text(
+                    text = placeName,
+                    style = TextStyle(textDecoration = TextDecoration.Underline, ),
+                )
             }
 
             var state by remember { mutableStateOf(0) }
@@ -65,6 +92,7 @@ fun DayScreen(viewModel: WeatherView, nav: NavController){
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(15.dp))
             if(state == 0){
                 MainPanel(currentWeather.value!!)
                 Spacer(

@@ -34,8 +34,8 @@ data class Geoname(
     val lng: String,
     @Json(name = "name")
     val name: String,
-    @Json(name = "population")
+    /*@Json(name = "population")
     val population: Int,
     @Json(name = "toponymName")
-    val toponymName: String
+    val toponymName: String*/
 )

@@ -39,6 +39,7 @@ fun MyApp() {
                 weatherView.latitude = placeView.place!!.lat.toDouble()
                 weatherView.longitude = placeView.place!!.lng.toDouble()
                 weatherView.place = "${placeView.place!!.name}, ${placeView.place!!.adminName1}, ${placeView.place!!.countryName}"
+                weatherView.isPlaceChosen = true
                 weatherView.getWeather()
             }
         }

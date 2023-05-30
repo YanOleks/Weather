@@ -15,4 +15,7 @@
     <string name="about">About</string>
     <string name="today">Today</string>
     <string name="week">Week</string>
+    <string name="position">Your position</string>
+    <string name="search">Search</string>
+    <string name="noFound">Not Found</string>
 </resources>

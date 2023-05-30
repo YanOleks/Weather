@@ -23,7 +23,7 @@ class PlaceView constructor(private val repo: PlacesRepo) : ViewModel(
 
     private var job: Job? = null
 
-    val language = Locale.getDefault().language
+    private val language: String = Locale.getDefault().language
 
     var places by mutableStateOf(emptyList<Geoname>())
     var loading = MutableLiveData(false)
