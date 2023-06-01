@@ -22,8 +22,7 @@ class AlarmReceiver : BroadcastReceiver() {
                     val weather = response.body()
                     if (response.isSuccessful && weather != null) {
                         Log.i("Success", weather.currentWeather.temperature.toString())
-                        val notification = Notification(context,
-                            weather.currentWeather.temperature.roundToInt())
+                        val notification = Notification(context, weather)
                         notification.notification()
                     }
 

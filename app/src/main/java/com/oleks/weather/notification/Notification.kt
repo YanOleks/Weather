@@ -5,22 +5,26 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.oleks.weather.R
+import com.oleks.weather.data.openmeteo.model.WeatherInfo
 
 class Notification(
     private val context: Context,
-    temperature: Int
+    weatherInfo: WeatherInfo
 ) {
     private val channelID = "weatherReport"
     private val channelName = "Weather Report"
 
     private var builder = NotificationCompat.Builder(context, channelID)
-        .setSmallIcon(R.drawable.ic_launcher_foreground)
-        .setContentTitle("Fuck")
-        .setContentText(temperature.toString())
+        .setSmallIcon(R.drawable.ic_test)
+        .setContentTitle(context.resources.getString(R.string.app_name))
+        .setContentText("Сьогодні: Мінливо ↓14° ↑26°")//TODO: add
+        .setLargeIcon(BitmapFactory.decodeResource(context.resources, R.drawable.cloudy))
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
@@ -33,7 +37,7 @@ class Notification(
                     Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // TODO: Consider calling
+                //  TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
                 //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
@@ -58,5 +62,18 @@ class Notification(
         val notificationManager: NotificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
+    }
+
+    private fun getState(code: Int): Pair<Int, Int> {
+        return when(code){
+            0 -> Pair(R.string.clear, R.drawable.sun)
+            1 -> Pair(R.string.mainly, R.drawable.partly_cloudy)
+            2 -> Pair(R.string.partly, R.drawable.partly_cloudy)
+            3 -> Pair(R.string.overcast, R.drawable.cloud)
+
+            51, 53, 55 -> Pair(R.string.drizzle, R.drawable.cloudy)
+            61, 63, 65, 80, 81, 82 -> Pair(R.string.rain, R.drawable.raining)
+            else -> Pair(R.string.rain,R.drawable.ic_test)
+        }
     }
 }

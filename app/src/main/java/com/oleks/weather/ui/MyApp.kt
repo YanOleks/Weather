@@ -2,6 +2,7 @@ package com.oleks.weather.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -15,12 +16,12 @@ import com.oleks.weather.ui.overview.WeatherView
 import com.oleks.weather.ui.settings.SettingsScreen
 
 @Composable
-fun MyApp() {
-    val navController = rememberNavController()
+fun MyApp(navController: NavController, weatherView: WeatherView, settingsView: SettingsView, placeView: PlaceView) {
+    /*val navController = rememberNavController()
     val weatherView = WeatherView(WeatherRepo())
     val settingsView = SettingsView(LocalContext.current)
-    val placeView = PlaceView(PlacesRepo())
-    NavHost(navController, startDestination = "home") {
+    val placeView = PlaceView(PlacesRepo())*/
+    /*NavHost(navController, startDestination = "home") {
         composable("home") {
             DayScreen(weatherView, navController)
         }
@@ -30,7 +31,7 @@ fun MyApp() {
         composable("settings"){
             SettingsScreen(settingsView)
         }
-    }
+    }*/
     navController.addOnDestinationChangedListener{ _, destination, _ ->
         if (destination.route == "home"){
             if(placeView.place != null && placeView.choosen) {

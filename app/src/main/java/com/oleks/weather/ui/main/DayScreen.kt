@@ -25,6 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -33,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.oleks.weather.R
+import com.oleks.weather.notification.Notification
 import com.oleks.weather.ui.overview.WeatherView
 import com.oleks.weather.ui.theme.WeatherTheme
 
@@ -47,6 +49,9 @@ fun DayScreen(viewModel: WeatherView, nav: NavController){
     var placeName by remember {
         mutableStateOf("")
     }
+
+
+
     var isPlaceChosen by remember {
         mutableStateOf(viewModel.isPlaceChosen)
     }

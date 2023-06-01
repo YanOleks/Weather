@@ -19,6 +19,8 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlin.math.roundToInt
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
+import com.oleks.weather.notification.Notification
 
 //TODO: latitude, longitude
 

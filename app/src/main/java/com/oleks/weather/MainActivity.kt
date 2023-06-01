@@ -19,13 +19,26 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.oleks.weather.data.di.WeatherRepo
+import com.oleks.weather.data.geonames.PlacesRepo
+import com.oleks.weather.notification.Notification
 import com.oleks.weather.ui.MyApp
+import com.oleks.weather.ui.main.DayScreen
+import com.oleks.weather.ui.main.Search
 import com.oleks.weather.ui.menu.AppBar
 import com.oleks.weather.ui.menu.Drawer
 import com.oleks.weather.ui.menu.MenuItems
+import com.oleks.weather.ui.overview.PlaceView
+import com.oleks.weather.ui.overview.SettingsView
+import com.oleks.weather.ui.overview.WeatherView
+import com.oleks.weather.ui.settings.SettingsScreen
 import com.oleks.weather.ui.theme.WeatherTheme
 import kotlinx.coroutines.launch
 
@@ -33,6 +46,7 @@ var LATITUDE:Double = 0.0
 var LONGITUDE:Double = 0.0
 class MainActivity : ComponentActivity() {
     private lateinit var locationManager: LocationManager
+
 
     val REQUEST_LOCATION_PERMISSION = 1
     private val locationListener = object : LocationListener {
@@ -73,8 +87,27 @@ class MainActivity : ComponentActivity() {
             LONGITUDE = lastKnownLocation.longitude
             // Use the latitude and longitude values as needed
         }
+
         setContent {
             WeatherTheme {
+                val navController = rememberNavController()
+                val weatherView = WeatherView(WeatherRepo())
+                val settingsView = SettingsView(LocalContext.current)
+                val placeView = PlaceView(PlacesRepo())
+                navController.addOnDestinationChangedListener{ _, destination, _ ->
+                    if (destination.route == "home"){
+                        if(placeView.place != null && placeView.choosen) {
+                            placeView.choosen = false
+                            weatherView.loading.value = false
+                            weatherView.latitude = placeView.place!!.lat.toDouble()
+                            weatherView.longitude = placeView.place!!.lng.toDouble()
+                            weatherView.place = "${placeView.place!!.name}, ${placeView.place!!.adminName1}, ${placeView.place!!.countryName}"
+                            weatherView.isPlaceChosen = true
+                            weatherView.getWeather()
+                        }
+                    }
+                }
+
                 val drawerState = rememberDrawerState(DrawerValue.Closed)
                 val scope = rememberCoroutineScope()
                 ModalNavigationDrawer(
@@ -83,7 +116,7 @@ class MainActivity : ComponentActivity() {
                         Drawer(
                             items = MenuItems.items,
                             onItemClick = {
-                                println("Fuck")
+                                navController.navigate(it.id)
                             }
                         )
                     },
@@ -102,7 +135,19 @@ class MainActivity : ComponentActivity() {
                         }
                     ){
                         Box(modifier = Modifier.padding(it)){
-                            MyApp()
+//                            MyApp(navController, weatherView, settingsView, placeView)
+                            //DayScreen(viewModel = weatherView, nav = navController)
+                            NavHost(navController, startDestination = "home") {
+                                composable("home") {
+                                    DayScreen(weatherView, navController)
+                                }
+                                composable("screen2") {
+                                    Search(placeView, navController)
+                                }
+                                composable("settings"){
+                                    SettingsScreen(settingsView)
+                                }
+                            }
                         }
                         /*Surface(
                             modifier = Modifier.fillMaxSize(),
