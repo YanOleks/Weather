@@ -83,7 +83,9 @@ class WeatherView constructor(
         val lowest: Int,
         val highest: Int,
         val state: Int,
-        val img: Int
+        val img: Int,
+        val humidity: Int,
+        val wind: String
     )
 
     private fun getCurrentWeather(weather: WeatherInfo): CurrentWeather {
@@ -97,8 +99,38 @@ class WeatherView constructor(
             weather.daily.temperature2mMin[0].roundToInt(),
             weather.daily.temperature2mMax[0].roundToInt(),
             stateString,
-            stateImg
+            stateImg,
+            weather.hourly.humidity[index],
+            getWind(weather.currentWeather.windSpeed, weather.currentWeather.windDirection)
         )
+    }
+
+    private fun getWind(speed: Double, direction: Double): String{
+        if(direction > 337.5 || direction <= 22.5){
+            return "↑${speed.roundToInt()}"
+        }
+        if(direction > 22.5 || direction <= 67.5){
+            return "↗${speed.roundToInt()}"
+        }
+        if(direction > 67.5 || direction <= 112.5){
+            return "→${speed.roundToInt()}"
+        }
+        if(direction > 112.5 || direction <= 175.5){
+            return "↘${speed.roundToInt()}"
+        }
+        if(direction > 175.5 || direction <= 202.5){
+            return "↓${speed.roundToInt()}"
+        }
+        if(direction > 202.5 || direction <= 247.5){
+            return "↙${speed.roundToInt()}"
+        }
+        if(direction > 247.5 || direction <= 292.5){
+            return "←${speed.roundToInt()}"
+        }
+        if(direction > 292.5 || direction <= 337.5){
+            return "↖${speed.roundToInt()}"
+        }
+        return ""
     }
 
     private fun getIndexFromTime(time: String): Int{

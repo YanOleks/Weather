@@ -23,5 +23,8 @@ data class Hourly(
     val time: List<String>,
 
     @Json(name = "weathercode")
-    val weatherCode: List<Int>
+    val weatherCode: List<Int>,
+
+    @Json(name = "relativehumidity_2m")
+    val humidity: List<Int>
 )

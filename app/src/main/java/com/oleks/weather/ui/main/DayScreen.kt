@@ -105,6 +105,13 @@ fun DayScreen(viewModel: WeatherView, nav: NavController){
                         .height(50.dp)
                 )
                 HourPanel(hourWeather.value!!)
+                Column() {
+                    Spacer(modifier = Modifier.height(15.dp))
+                    Text(stringResource(id = R.string.humidity) + currentWeather.value!!.humidity + "%")
+                    Text(stringResource(id = R.string.wind) + currentWeather.value!!.wind + stringResource(
+                        id = R.string.speed
+                    ))
+                }
             } else if (state == 1){
                 WeekTab(weekData.value!!)
             }

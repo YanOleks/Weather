@@ -42,8 +42,8 @@ import com.oleks.weather.ui.settings.SettingsScreen
 import com.oleks.weather.ui.theme.WeatherTheme
 import kotlinx.coroutines.launch
 
-var LATITUDE:Double = 0.0
-var LONGITUDE:Double = 0.0
+var LATITUDE:Double = 50.44
+var LONGITUDE:Double =30.51
 class MainActivity : ComponentActivity() {
     private lateinit var locationManager: LocationManager
 
