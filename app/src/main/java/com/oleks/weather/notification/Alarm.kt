@@ -10,8 +10,13 @@ class Alarm(
     context: Context
 ) {
     private val alarmManager: AlarmManager? = context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager
-    private val intent = Intent(context, AlarmReceiver::class.java)
-    private val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+    private val intent = Intent(context, Notification::class.java)
+    private val pendingIntent =
+        PendingIntent.getBroadcast(
+            context,
+            notificationID,
+            intent,
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
     fun setAlarm(alarmHour: Int, alarmMinute: Int) {
         val calender = Calendar.getInstance().apply {
@@ -31,6 +36,10 @@ class Alarm(
         alarmManager?.cancel(pendingIntent)
     }
     init {
+        /*val title = "fuck"
+        val message = "test"
+        intent.putExtra(titleExtra, title)
+        intent.putExtra(messageExtra, message)*/
         intent.action = "SetAlarmClock"
     }
 }

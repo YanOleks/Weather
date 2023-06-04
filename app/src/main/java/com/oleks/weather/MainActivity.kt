@@ -1,6 +1,8 @@
 package com.oleks.weather
 
 import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
@@ -28,8 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.oleks.weather.data.di.WeatherRepo
 import com.oleks.weather.data.geonames.PlacesRepo
-import com.oleks.weather.notification.Notification
-import com.oleks.weather.ui.MyApp
+import com.oleks.weather.notification.channelID
 import com.oleks.weather.ui.main.DayScreen
 import com.oleks.weather.ui.main.Search
 import com.oleks.weather.ui.menu.AppBar
@@ -72,6 +73,7 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        createNotificationChannel()
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // Register for location updates
@@ -162,6 +164,18 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+
+
+    }
+
+    private fun createNotificationChannel() {
+        val name = "Notif Channel"
+        val desc = "A Description of the Channel"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val channel = NotificationChannel(channelID, name , importance)
+        channel.description = desc
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
     }
 }
 
