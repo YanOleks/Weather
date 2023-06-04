@@ -31,6 +31,6 @@ class Alarm(
         alarmManager?.cancel(pendingIntent)
     }
     init {
-        intent.setAction("SetAlarmClock")
+        intent.action = "SetAlarmClock"
     }
 }
