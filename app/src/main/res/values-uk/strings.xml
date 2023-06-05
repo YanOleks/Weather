@@ -21,4 +21,5 @@
     <string name="humidity">Вологість:</string>
     <string name="wind">Вітер:</string>
     <string name="speed">км/год</string>
+    <string name="notification_today">Погода на сьогодні</string>
 </resources>

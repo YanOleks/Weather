@@ -31,6 +31,7 @@ import androidx.navigation.compose.rememberNavController
 import com.oleks.weather.data.di.WeatherRepo
 import com.oleks.weather.data.geonames.PlacesRepo
 import com.oleks.weather.notification.channelID
+import com.oleks.weather.ui.main.About
 import com.oleks.weather.ui.main.DayScreen
 import com.oleks.weather.ui.main.Search
 import com.oleks.weather.ui.menu.AppBar
@@ -148,6 +149,9 @@ class MainActivity : ComponentActivity() {
                                 }
                                 composable("settings"){
                                     SettingsScreen(settingsView)
+                                }
+                                composable("about"){
+                                    About()
                                 }
                             }
                         }
