@@ -29,7 +29,7 @@ class Notification : BroadcastReceiver(){
                 val strState = context.resources.getString(state)
                 val high = weather.daily.temperature2mMax[0]
                 val low = weather.daily.temperature2mMin[0]
-                val str = "$high° / $low° · $strState"
+                val str = "↑$high° / ↓$low°  $strState"
                 val notification = NotificationCompat.Builder(context, channelID)
                     .setSmallIcon(R.drawable.sun)
                     .setContentTitle(context.resources.getString(R.string.notification_today))
