@@ -11,7 +11,6 @@ import android.location.LocationManager
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-<<<<<<< HEAD
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerValue
@@ -19,18 +18,11 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
-=======
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
->>>>>>> master
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-<<<<<<< HEAD
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.compose.NavHost
@@ -49,11 +41,6 @@ import com.oleks.weather.ui.overview.PlaceView
 import com.oleks.weather.ui.overview.SettingsView
 import com.oleks.weather.ui.overview.WeatherView
 import com.oleks.weather.ui.settings.SettingsScreen
-=======
-import com.oleks.weather.data.api.apiHelper
-import com.oleks.weather.ui.main.DayScreen
-import com.oleks.weather.ui.overview.WeatherViewModel
->>>>>>> master
 import com.oleks.weather.ui.theme.WeatherTheme
 import kotlinx.coroutines.launch
 
@@ -86,7 +73,6 @@ class MainActivity : ComponentActivity() {
     }
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
-        lateinit var weatherViewModel: WeatherViewModel
         super.onCreate(savedInstanceState)
         createNotificationChannel()
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -107,7 +93,6 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             WeatherTheme {
-<<<<<<< HEAD
                 val navController = rememberNavController()
                 val weatherView = WeatherView(WeatherRepo())
                 val settingsView = SettingsView(LocalContext.current)
@@ -124,16 +109,6 @@ class MainActivity : ComponentActivity() {
                             weatherView.getWeather()
                         }
                     }
-=======
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    weatherViewModel = WeatherViewModel(apiHelper)
-                    DayScreen()
-
->>>>>>> master
                 }
 
                 val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -207,19 +182,12 @@ class MainActivity : ComponentActivity() {
         notificationManager.createNotificationChannel(channel)
     }
 }
-@Composable
-fun Text(){
-    Text("LOL")
-}
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     WeatherTheme {
         //DayScreen()
-<<<<<<< HEAD
 
-=======
->>>>>>> master
     }
 }

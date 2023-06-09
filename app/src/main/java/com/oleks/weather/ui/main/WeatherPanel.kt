@@ -31,20 +31,12 @@ internal fun MainPanel(currentWeather: WeatherView.CurrentWeather){
             )
     ) {
         Row{
-<<<<<<< HEAD
             Text("↓${currentWeather.lowest}°")
-=======
-            Text("↓${8}°")
->>>>>>> master
             Spacer(
                 modifier = Modifier
                     .width(5.dp)
             )
-<<<<<<< HEAD
             Text("↑${currentWeather.highest}°")
-=======
-            Text("↑${8}°")
->>>>>>> master
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -52,11 +44,7 @@ internal fun MainPanel(currentWeather: WeatherView.CurrentWeather){
                 .fillMaxWidth()
         ) {
             Text(
-<<<<<<< HEAD
                 "${currentWeather.temperature}°",
-=======
-                "${8}°",
->>>>>>> master
                 textAlign = TextAlign.Left,
                 fontSize = 48.sp,
                 modifier = Modifier
@@ -75,13 +63,9 @@ internal fun MainPanel(currentWeather: WeatherView.CurrentWeather){
             modifier = Modifier
                 .fillMaxWidth()
         ) {
+
             Text(
-<<<<<<< HEAD
                 "${stringResource(R.string.feels)} ${currentWeather.apparent}°",
-=======
-                //TODO: add R.string
-                "Feels like ${8}",
->>>>>>> master
                 modifier = Modifier
                     .weight(2f)
             )

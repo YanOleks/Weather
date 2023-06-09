@@ -39,7 +39,6 @@ import com.oleks.weather.ui.overview.WeatherView
 import com.oleks.weather.ui.theme.WeatherTheme
 
 @Composable
-<<<<<<< HEAD
 fun DayScreen(viewModel: WeatherView, nav: NavController){
 
     var isButtonClicked by remember { mutableStateOf(false) }
@@ -119,13 +118,6 @@ fun DayScreen(viewModel: WeatherView, nav: NavController){
         }
     } else {
         Box(
-=======
-fun DayScreen(){
-    Column{
-        //TODO: change to class "PANEL"
-        MainPanel()
-        Spacer(
->>>>>>> master
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(),

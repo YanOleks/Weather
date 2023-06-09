@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
 <resources>
     <string name="feels">Відчувається</string>
     <string name="loading">Завантаження…</string>
@@ -24,6 +23,3 @@
     <string name="speed">км/год</string>
     <string name="notification_today">Погода на сьогодні</string>
 </resources>
-=======
-<resources></resources>
->>>>>>> master
