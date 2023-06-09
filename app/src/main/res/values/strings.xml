@@ -1,4 +1,28 @@
 <resources>
     <string name="app_name" translatable="false">Weather</string>
     <string name="feels">Feels like</string>
+<<<<<<< HEAD
+    <string name="loading">Loading…</string>
+    <string name="notification">Send notifications</string>
+    <string name="notification_time">Send at</string>
+    <string name="clear">Clear</string>
+    <string name="mainly">Mainly Clear</string>
+    <string name="partly">Partly Cloudly</string>
+    <string name="overcast">Overcast</string>
+    <string name="drizzle">Drizzle</string>
+    <string name="rain">Rain</string>
+    <string name="home">Home</string>
+    <string name="settings">Notifications</string>
+    <string name="about">About</string>
+    <string name="today">Today</string>
+    <string name="week">Week</string>
+    <string name="position">Your position</string>
+    <string name="search">Search</string>
+    <string name="noFound">Not Found</string>
+    <string name="humidity">Humidity:</string>
+    <string name="wind">Wind:</string>
+    <string name="speed">km/h</string>
+    <string name="notification_today">Today\'s forecast</string>
+=======
+>>>>>>> master
 </resources>

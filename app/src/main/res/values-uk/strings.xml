@@ -1,2 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
+<resources>
+    <string name="feels">Відчувається</string>
+    <string name="loading">Завантаження…</string>
+    <string name="notification">Надсилати сповіщення</string>
+    <string name="notification_time">Надсилати о</string>
+    <string name="clear">Ясно</string>
+    <string name="mainly">Ясно</string>
+    <string name="partly">Мінливо</string>
+    <string name="overcast">Похмуро</string>
+    <string name="drizzle">Мряка</string>
+    <string name="rain">Дощ</string>
+    <string name="home">Головна</string>
+    <string name="settings">Сповіщення</string>
+    <string name="about">Про застосунок</string>
+    <string name="today">Сьогодні</string>
+    <string name="week">Тиждень</string>
+    <string name="position">Ваше розміщення</string>
+    <string name="search">Пошук</string>
+    <string name="noFound">Не знайдено</string>
+    <string name="humidity">Вологість:</string>
+    <string name="wind">Вітер:</string>
+    <string name="speed">км/год</string>
+    <string name="notification_today">Погода на сьогодні</string>
+</resources>
+=======
 <resources></resources>
+>>>>>>> master

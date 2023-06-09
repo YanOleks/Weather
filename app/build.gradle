@@ -48,7 +48,11 @@ android {
 
 dependencies {
 
+<<<<<<< HEAD
+    implementation 'androidx.core:core-ktx:1.10.1'
+=======
     implementation 'androidx.core:core-ktx:1.10.0'
+>>>>>>> master
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
     implementation 'androidx.activity:activity-compose:1.7.1'
     implementation platform('androidx.compose:compose-bom:2023.05.00')
@@ -66,6 +70,22 @@ dependencies {
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
 
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+<<<<<<< HEAD
+    implementation "com.squareup.moshi:moshi-kotlin:1.14.0"
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    // ViewModel utilities for Compose
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+
+    implementation "androidx.compose.runtime:runtime-livedata:1.4.3"
+
+    def nav_version = "2.5.3"
+
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+}
+=======
     implementation("com.squareup.moshi:moshi:1.14.0")
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'
 }
+>>>>>>> master

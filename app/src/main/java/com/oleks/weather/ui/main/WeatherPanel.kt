@@ -13,13 +13,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.oleks.weather.R
+import com.oleks.weather.ui.overview.WeatherView
 
 @Composable
-internal fun MainPanel(){
+internal fun MainPanel(currentWeather: WeatherView.CurrentWeather){
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -29,12 +31,20 @@ internal fun MainPanel(){
             )
     ) {
         Row{
+<<<<<<< HEAD
+            Text("↓${currentWeather.lowest}°")
+=======
             Text("↓${8}°")
+>>>>>>> master
             Spacer(
                 modifier = Modifier
                     .width(5.dp)
             )
+<<<<<<< HEAD
+            Text("↑${currentWeather.highest}°")
+=======
             Text("↑${8}°")
+>>>>>>> master
         }
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -42,14 +52,18 @@ internal fun MainPanel(){
                 .fillMaxWidth()
         ) {
             Text(
+<<<<<<< HEAD
+                "${currentWeather.temperature}°",
+=======
                 "${8}°",
+>>>>>>> master
                 textAlign = TextAlign.Left,
                 fontSize = 48.sp,
                 modifier = Modifier
                     .weight(2f)
             )
             Image(
-                painterResource(id = R.drawable.ic_test),
+                painterResource(currentWeather.img),
                 modifier = Modifier
                     .weight(1f)
                     .height(80.dp),
@@ -62,13 +76,17 @@ internal fun MainPanel(){
                 .fillMaxWidth()
         ) {
             Text(
+<<<<<<< HEAD
+                "${stringResource(R.string.feels)} ${currentWeather.apparent}°",
+=======
                 //TODO: add R.string
                 "Feels like ${8}",
+>>>>>>> master
                 modifier = Modifier
                     .weight(2f)
             )
             Text(
-                "Test state",
+                stringResource(id = currentWeather.state),
                 textAlign = TextAlign.Center,
                 modifier = Modifier
                     .weight(1f)
