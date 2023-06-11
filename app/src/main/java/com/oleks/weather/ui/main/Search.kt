@@ -34,7 +34,7 @@ import com.oleks.weather.ui.overview.PlaceView
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Search(model: PlaceView, nav: NavController) {
+fun Search(model: PlaceView, nav: NavController, onClick: () -> Unit) {
 
 
     var search by remember {
@@ -79,7 +79,10 @@ fun Search(model: PlaceView, nav: NavController) {
         Spacer(modifier = Modifier.height(25.dp))
         if (search.text == ""){
             TextButton(
-                onClick = {nav.navigate("home")},
+                onClick = {
+                    onClick()
+                    nav.navigate("home")
+                },
                 Modifier.padding(start = 15.dp)
             ) {
                 Text(stringResource(id = R.string.position))

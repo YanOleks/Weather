@@ -22,4 +22,8 @@
     <string name="wind">Wind:</string>
     <string name="speed">km/h</string>
     <string name="notification_today">Today\'s forecast</string>
+    <string name="fog">Fog</string>
+    <string name="snow">Snow</string>
+    <string name="thunder">Thunderstorm</string>
+    <string name="sound">Sound</string>
 </resources>

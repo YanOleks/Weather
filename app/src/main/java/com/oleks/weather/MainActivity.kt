@@ -145,7 +145,11 @@ class MainActivity : ComponentActivity() {
                                     DayScreen(weatherView, navController)
                                 }
                                 composable("screen2") {
-                                    Search(placeView, navController)
+                                    Search(placeView, navController) {
+                                        weatherView.isPlaceChosen = false
+                                        weatherView.latitude = LATITUDE
+                                        weatherView.longitude = LONGITUDE
+                                    }
                                 }
                                 composable("settings"){
                                     SettingsScreen(settingsView)

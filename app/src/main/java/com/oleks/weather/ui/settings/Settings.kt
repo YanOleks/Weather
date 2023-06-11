@@ -68,6 +68,20 @@ fun SettingsScreen(
                 Text("${alarmHour.value}:${String.format("%02d",alarmMinute.value)}")
             }
         }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Text(
+                stringResource(R.string.sound)
+            )
+            Switch(checked = settingsView.withSound, onCheckedChange = {isSwitchOn ->
+                settingsView.withSound = isSwitchOn
+
+                settingsView.changeAlarmState()
+            })
+        }
     }
 }
 

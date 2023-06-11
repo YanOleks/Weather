@@ -22,4 +22,8 @@
     <string name="wind">Вітер:</string>
     <string name="speed">км/год</string>
     <string name="notification_today">Погода на сьогодні</string>
+    <string name="fog">Туман</string>
+    <string name="snow">Сніг</string>
+    <string name="thunder">Гроза</string>
+    <string name="sound">Звук</string>
 </resources>

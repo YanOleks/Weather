@@ -5,6 +5,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.oleks.weather.notification.Alarm
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 class SettingsView(
     context: Context
@@ -15,9 +17,19 @@ class SettingsView(
     private var _isAlarmOn = mutableStateOf(false)
     private var _alarmHour = mutableStateOf(5)
     private var _alarmMinute = mutableStateOf(0)
+    var _withSound by mutableStateOf(true)
+
 
     val alarm = Alarm(context)
 
+    var withSound: Boolean
+        get() = _withSound
+        set(value) {
+            _withSound = value
+            val editor = sharedPreferences.edit()
+            editor.putBoolean("SOUND", value)
+            editor.apply()
+        }
     var isAlarmOn: MutableState<Boolean>
         get() = _isAlarmOn
         set(value) {
@@ -53,7 +65,7 @@ class SettingsView(
        alarm.cancelAlarm()
        val editor = sharedPreferences.edit()
        if(isAlarmOn.value) {
-           alarm.setAlarm(alarmHour.value, alarmMinute.value)
+           alarm.setAlarm(alarmHour.value, alarmMinute.value, withSound)
 
            editor.putBoolean("IS_ALARM_ON", isAlarmOn.value)
            editor.putInt("ALARM_HOUR", alarmHour.value)
@@ -68,5 +80,6 @@ class SettingsView(
         _isAlarmOn.value = sharedPreferences.getBoolean("IS_ALARM_ON", false)
         _alarmHour.value = sharedPreferences.getInt("ALARM_HOUR", 5)
         _alarmMinute.value = sharedPreferences.getInt("ALARM_MINUTE", 0)
+        _withSound = sharedPreferences.getBoolean("SOUND", false)
     }
 }

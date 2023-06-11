@@ -2,6 +2,7 @@ package com.oleks.weather.ui.overview
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.oleks.weather.LATITUDE
@@ -18,9 +19,6 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlin.math.roundToInt
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
-import com.oleks.weather.notification.Notification
 
 //TODO: latitude, longitude
 
@@ -106,31 +104,17 @@ class WeatherView constructor(
     }
 
     private fun getWind(speed: Double, direction: Double): String{
-        if(direction > 337.5 || direction <= 22.5){
-            return "↑${speed.roundToInt()}"
+        return when(direction) {
+            in (337.5..360.0), in (0.0..22.5) -> "↑${speed.roundToInt()}"
+            in (22.5..67.5) -> "↗${speed.roundToInt()}"
+            in (67.5..112.5) -> "→${speed.roundToInt()}"
+            in (112.5..157.5) -> "↘${speed.roundToInt()}"
+            in (157.5..202.5) -> "↓${speed.roundToInt()}"
+            in (202.5..247.5) -> "↙${speed.roundToInt()}"
+            in (247.5..292.5) -> "←${speed.roundToInt()}"
+            in (292.5..337.5) -> "↖${speed.roundToInt()}"
+            else -> "" // Handle any other cases
         }
-        if(direction > 22.5 || direction <= 67.5){
-            return "↗${speed.roundToInt()}"
-        }
-        if(direction > 67.5 || direction <= 112.5){
-            return "→${speed.roundToInt()}"
-        }
-        if(direction > 112.5 || direction <= 175.5){
-            return "↘${speed.roundToInt()}"
-        }
-        if(direction > 175.5 || direction <= 202.5){
-            return "↓${speed.roundToInt()}"
-        }
-        if(direction > 202.5 || direction <= 247.5){
-            return "↙${speed.roundToInt()}"
-        }
-        if(direction > 247.5 || direction <= 292.5){
-            return "←${speed.roundToInt()}"
-        }
-        if(direction > 292.5 || direction <= 337.5){
-            return "↖${speed.roundToInt()}"
-        }
-        return ""
     }
 
     private fun getIndexFromTime(time: String): Int{
@@ -142,8 +126,10 @@ class WeatherView constructor(
             1 -> Pair(R.string.mainly, R.drawable.partly_cloudy)
             2 -> Pair(R.string.partly, R.drawable.partly_cloudy)
             3 -> Pair(R.string.overcast, R.drawable.cloud)
-
-            51, 53, 55 -> Pair(R.string.drizzle, R.drawable.cloudy)
+            45, 48 -> Pair(R.string.fog, R.drawable.fog)
+            71, 73, 75 -> Pair(R.string.snow, R.drawable.snowfall)
+            95, 96, 99 -> Pair(R.string.thunder, R.drawable.storm)
+            51, 53, 55, 56,57 -> Pair(R.string.drizzle, R.drawable.cloudy)
             61, 63, 65, 80, 81, 82 -> Pair(R.string.rain, R.drawable.raining)
             else -> Pair(R.string.rain,R.drawable.ic_test)
         }

@@ -18,12 +18,12 @@ class Alarm(
             intent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
 
-    fun setAlarm(alarmHour: Int, alarmMinute: Int) {
+    fun setAlarm(alarmHour: Int, alarmMinute: Int, sound: Boolean) {
         val calender = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, alarmHour)
             set(Calendar.MINUTE, alarmMinute)
         }
-
+        intent.putExtra("sound", sound)
         alarmManager?.setRepeating(
             AlarmManager.RTC,
             calender.timeInMillis,
