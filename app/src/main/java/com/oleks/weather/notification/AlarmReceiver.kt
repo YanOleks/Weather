@@ -51,10 +51,12 @@ class Notification : BroadcastReceiver(){
             2 -> Pair(R.string.partly, R.drawable.partly_cloudy)
             3 -> Pair(R.string.overcast, R.drawable.cloud)
             45, 48 -> Pair(R.string.fog, R.drawable.fog)
-            71, 73, 75 -> Pair(R.string.snow, R.drawable.snowfall)
+            71, 73, 75, 85, 86 -> Pair(R.string.snow, R.drawable.snowfall)
             95, 96, 99 -> Pair(R.string.thunder, R.drawable.storm)
             51, 53, 55, 56,57 -> Pair(R.string.drizzle, R.drawable.cloudy)
-            61, 63, 65, 80, 81, 82 -> Pair(R.string.rain, R.drawable.raining)
+            61, 63, 65, 66, 67 -> Pair(R.string.rain, R.drawable.raining)
+            80, 81, 82 -> Pair(R.string.shower, R.drawable.shower)
+            77 -> Pair(R.string.grains, R.drawable.snowfall)
             else -> Pair(R.string.rain,R.drawable.ic_test)
         }
     }

@@ -25,7 +25,7 @@ import kotlin.math.roundToInt
 class WeatherView constructor(
     private val weatherRepo: WeatherRepo
 ): ViewModel() {
-    private val hours = 23
+    private val hours = 24
     private val days = 6
 
     var latitude: Double = LATITUDE
@@ -127,10 +127,12 @@ class WeatherView constructor(
             2 -> Pair(R.string.partly, R.drawable.partly_cloudy)
             3 -> Pair(R.string.overcast, R.drawable.cloud)
             45, 48 -> Pair(R.string.fog, R.drawable.fog)
-            71, 73, 75 -> Pair(R.string.snow, R.drawable.snowfall)
+            71, 73, 75, 85, 86 -> Pair(R.string.snow, R.drawable.snowfall)
             95, 96, 99 -> Pair(R.string.thunder, R.drawable.storm)
             51, 53, 55, 56,57 -> Pair(R.string.drizzle, R.drawable.cloudy)
-            61, 63, 65, 80, 81, 82 -> Pair(R.string.rain, R.drawable.raining)
+            61, 63, 65, 66, 67 -> Pair(R.string.rain, R.drawable.raining)
+            80, 81, 82 -> Pair(R.string.shower, R.drawable.shower)
+            77 -> Pair(R.string.grains, R.drawable.snowfall)
             else -> Pair(R.string.rain,R.drawable.ic_test)
         }
     }
@@ -148,7 +150,7 @@ class WeatherView constructor(
         val list = mutableListOf<HourWeather>()
         var time = getIndexFromTime(weather.currentWeather.time)
         val temperatureList = weather.hourly.temperature2m
-        for (i in 0..hours){
+        for (i in 1..hours){
             val (_, img) = getState(weather.hourly.weatherCode[time])
             list.add(HourWeather(
                 "${ if (time < 24) time else time - 24}:00",
@@ -192,7 +194,7 @@ class WeatherView constructor(
         //val date = LocalDate.parse(str, DateTimeFormatter.ISO_DATE)
         val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
         val outputFormat  = SimpleDateFormat("d MMMM", Locale(Locale.getDefault().language))
-        val date = inputFormat.parse(str)
+        val date = inputFormat.parse(str)!!
         return outputFormat.format(date)
     }
 }

@@ -26,4 +26,6 @@
     <string name="snow">Snow</string>
     <string name="thunder">Thunderstorm</string>
     <string name="sound">Sound</string>
+    <string name="shower">Shower</string>
+    <string name="grains">Snow grains</string>
 </resources>

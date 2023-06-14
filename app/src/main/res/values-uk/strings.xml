@@ -26,4 +26,6 @@
     <string name="snow">Сніг</string>
     <string name="thunder">Гроза</string>
     <string name="sound">Звук</string>
+    <string name="shower">Злива</string>
+    <string name="grains">Град</string>
 </resources>
